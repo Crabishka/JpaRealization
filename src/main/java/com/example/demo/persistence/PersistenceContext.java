@@ -13,7 +13,28 @@ import java.util.Properties;
 public class PersistenceContext implements PersistenceUnitInfo {
 
     String persistenceUnitName;
-    DataSourcePool dataSourcePool;
+    DataSource dataSourcePool;
+
+    public PersistenceContext(String persistenceUnitName, DataSource dataSourcePool) {
+        this.persistenceUnitName = persistenceUnitName;
+        this.dataSourcePool = dataSourcePool;
+    }
+
+    XmlParser xmlParser = new XmlParser(); // TODO Переделать
+
+    public PersistenceContext(String persistenceUnitName) {
+
+        try {
+            PersistenceContext tempContext = xmlParser.readPersistenceContext(persistenceUnitName);
+            this.dataSourcePool = tempContext.getJtaDataSource() == null ?
+                    tempContext.getNonJtaDataSource() : tempContext.getJtaDataSource();
+            this.persistenceUnitName = persistenceUnitName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public String getPersistenceUnitName() {
@@ -38,6 +59,10 @@ public class PersistenceContext implements PersistenceUnitInfo {
     @Override
     public DataSource getNonJtaDataSource() {
         return null;
+    }
+
+    public DataSource getAnyDataSource() {
+        return dataSourcePool;
     }
 
     @Override

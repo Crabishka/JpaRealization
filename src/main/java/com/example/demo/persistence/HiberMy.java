@@ -1,6 +1,8 @@
 package com.example.demo.persistence;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import javax.persistence.spi.PersistenceProvider;
 import javax.persistence.spi.PersistenceUnitInfo;
 import javax.persistence.spi.ProviderUtil;
@@ -8,9 +10,12 @@ import java.util.Map;
 
 public class HiberMy implements PersistenceProvider {
 
+
+
     @Override
     public EntityManagerFactory createEntityManagerFactory(String s, Map map) {
-        return null;
+        PersistenceContext persistenceContext = new PersistenceContext(s);
+        return new EntityManagerFactoryImpl((DataSourcePool) persistenceContext.getAnyDataSource());
     }
 
     @Override

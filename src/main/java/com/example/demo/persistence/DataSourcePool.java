@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class DataSourcePool implements DataSource {
 
-    String DriverClassName;
+    String driverClassName;
     String username;
     String password;
     String URL;

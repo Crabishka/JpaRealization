@@ -13,6 +13,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="demo" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.reflections:reflections:0.9.11" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:20.0" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.21.0-GA" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/demo-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

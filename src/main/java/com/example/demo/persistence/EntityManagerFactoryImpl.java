@@ -3,12 +3,24 @@ package com.example.demo.persistence;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.metamodel.Metamodel;
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntityManagerFactoryImpl implements EntityManagerFactory {
+
+    DataSourcePool dataSourcePool;
+    EntityBeanProcessor entityBeanProcessor = new EntityBeanProcessor();
+    // <aClass, metadata>
+    Map<Class<?>, EntityBean> entityBeanMap;
+
+    public EntityManagerFactoryImpl(DataSourcePool dataSourcePool) {
+        this.dataSourcePool = dataSourcePool;
+        this.entityBeanMap = entityBeanProcessor.createEntityBean();
+    }
+
     @Override
     public EntityManager createEntityManager() {
-        return null;
+        return new EntityManagerImpl(dataSourcePool, entityBeanMap);
     }
 
     @Override

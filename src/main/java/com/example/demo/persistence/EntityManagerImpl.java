@@ -6,12 +6,48 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.metamodel.Metamodel;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 public class EntityManagerImpl implements EntityManager {
+
+    DataSourcePool dataSourcePool;
+    Map<Class<?>, EntityBean> entityBeanMap;
+
+
+    public EntityManagerImpl(DataSourcePool dataSourcePool, Map<Class<?>, EntityBean> entityBeanMap) {
+        this.dataSourcePool = dataSourcePool;
+        this.entityBeanMap = entityBeanMap;
+    }
+
     @Override
     public void persist(Object o) {
+        Class<?> aClass = o.getClass();
+        Connection connection = null;
+        try {
+            connection = dataSourcePool.getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        EntityBean entityBean = entityBeanMap.get(aClass);
+        StringBuilder preparedSql = new StringBuilder();
+        preparedSql.append("insert into ").append(entityBean.tableName).append(" (");
+        String[] strings = entityBean.primitiveField.keySet().toArray(new String[0]);
+        preparedSql.append(strings[0]);
+        for (int i = 1; i < strings.length; i++) {
+            preparedSql.append(",").append(strings[i]);
+        }
+        strings = entityBean.mappingClass.keySet().toArray(new String[0]);
+        for (String str : strings) {
+           preparedSql.append(",").append(str);
+        }
+        preparedSql.append(")");
+        preparedSql.append("values");
+        System.out.println(preparedSql);
+
 
     }
 
@@ -29,6 +65,7 @@ public class EntityManagerImpl implements EntityManager {
     public <T> T find(Class<T> aClass, Object o) {
         return null;
     }
+
 
     @Override
     public <T> T find(Class<T> aClass, Object o, Map<String, Object> map) {
