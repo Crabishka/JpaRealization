@@ -7,14 +7,11 @@
         <provider>com.example.demo.persistence.HiberMy</provider>
         <jta-data-source>java:/PostgresDS</jta-data-source>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:postgresql://localhost:5432/postgres"/> <!-- BD Mane -->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="admin"/> <!-- DB User -->
             <property name="javax.persistence.jdbc.password" value="koteika322"/> <!-- DB Password -->
-
-
-
-
         </properties>
     </persistence-unit>
 </persistence>

@@ -19,14 +19,14 @@ public class XmlParser {
 
 
     public PersistenceContext readPersistenceContext(String persistenceUnitName) throws ParserConfigurationException, IOException, SAXException, SQLException {
-        String path = new String();
-        File file = new File(path);
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-                .newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(file);
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xPath = xPathFactory.newXPath();
+//        String path = "src/main/resources/META-INF/persistence.xml";
+//        File file = new File(path);
+//        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+//                .newInstance();
+//        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+//        Document document = documentBuilder.parse(file);
+//        XPathFactory xPathFactory = XPathFactory.newInstance();
+//        XPath xPath = xPathFactory.newXPath();
 
         String URL = "jdbc:postgresql://localhost:5432/postgres";
         String password = "koteika322";

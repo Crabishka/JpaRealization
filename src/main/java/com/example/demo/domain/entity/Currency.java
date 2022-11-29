@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "currency")
 public class Currency {
+
     @Id
     @Column(name = "id")
-
     private Long id;
 
     private Long resourceId;

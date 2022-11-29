@@ -35,17 +35,18 @@ public class EntityManagerImpl implements EntityManager {
         EntityBean entityBean = entityBeanMap.get(aClass);
         StringBuilder preparedSql = new StringBuilder();
         preparedSql.append("insert into ").append(entityBean.tableName).append(" (");
+        preparedSql.append("id, ");
         String[] strings = entityBean.primitiveField.keySet().toArray(new String[0]);
         preparedSql.append(strings[0]);
         for (int i = 1; i < strings.length; i++) {
-            preparedSql.append(",").append(strings[i]);
+            preparedSql.append(", ").append(strings[i]);
         }
         strings = entityBean.mappingClass.keySet().toArray(new String[0]);
         for (String str : strings) {
            preparedSql.append(",").append(str);
         }
         preparedSql.append(")");
-        preparedSql.append("values");
+        preparedSql.append(" values");
         System.out.println(preparedSql);
 
 

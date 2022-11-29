@@ -16,7 +16,7 @@ public class EntityBeanProcessor {
 
 
     public Map<Class<?>, EntityBean> createEntityBean() {
-        Reflections reflections = new Reflections("src.main.java.com");
+        Reflections reflections = new Reflections("com.example.demo.domain");
         Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
         Map<Class<?>, EntityBean> entityBeanMap = new HashMap<>();
         for (Class<?> entity : entities) {
